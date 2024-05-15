@@ -1,0 +1,2 @@
+drivers/media/pci/intel/ipu6/../ipu-psys.o drivers/media/pci/intel/ipu6/ipu6-psys.o drivers/media/pci/intel/ipu6/ipu-resources.o drivers/media/pci/intel/ipu6/ipu6-psys-gpc.o drivers/media/pci/intel/ipu6/ipu6-l-scheduler.o drivers/media/pci/intel/ipu6/ipu6-ppg.o drivers/media/pci/intel/ipu6/ipu-fw-resources.o drivers/media/pci/intel/ipu6/ipu6-fw-resources.o drivers/media/pci/intel/ipu6/ipu6se-fw-resources.o drivers/media/pci/intel/ipu6/ipu6ep-fw-resources.o drivers/media/pci/intel/ipu6/../ipu-fw-psys.o drivers/media/pci/intel/ipu6/../ipu-psys-compat32.o
+

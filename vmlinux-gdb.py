@@ -1,0 +1,1 @@
+/home/frankwwy/linux-source-5.15.0/scripts/gdb/vmlinux-gdb.py

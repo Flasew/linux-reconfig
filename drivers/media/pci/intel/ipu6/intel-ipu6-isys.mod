@@ -1,0 +1,2 @@
+drivers/media/pci/intel/ipu6/../ipu-isys.o drivers/media/pci/intel/ipu6/../ipu-isys-csi2.o drivers/media/pci/intel/ipu6/ipu6-isys.o drivers/media/pci/intel/ipu6/ipu6-isys-phy.o drivers/media/pci/intel/ipu6/ipu6-isys-csi2.o drivers/media/pci/intel/ipu6/ipu6-isys-gpc.o drivers/media/pci/intel/ipu6/../ipu-isys-csi2-be-soc.o drivers/media/pci/intel/ipu6/../ipu-fw-isys.o drivers/media/pci/intel/ipu6/../ipu-isys-video.o drivers/media/pci/intel/ipu6/../ipu-isys-queue.o drivers/media/pci/intel/ipu6/../ipu-isys-subdev.o
+

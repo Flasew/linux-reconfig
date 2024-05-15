@@ -1,0 +1,2 @@
+drivers/infiniband/hw/irdma/cm.o drivers/infiniband/hw/irdma/ctrl.o drivers/infiniband/hw/irdma/hmc.o drivers/infiniband/hw/irdma/hw.o drivers/infiniband/hw/irdma/i40iw_hw.o drivers/infiniband/hw/irdma/i40iw_if.o drivers/infiniband/hw/irdma/icrdma_hw.o drivers/infiniband/hw/irdma/main.o drivers/infiniband/hw/irdma/pble.o drivers/infiniband/hw/irdma/puda.o drivers/infiniband/hw/irdma/trace.o drivers/infiniband/hw/irdma/uda.o drivers/infiniband/hw/irdma/uk.o drivers/infiniband/hw/irdma/utils.o drivers/infiniband/hw/irdma/verbs.o drivers/infiniband/hw/irdma/ws.o
+

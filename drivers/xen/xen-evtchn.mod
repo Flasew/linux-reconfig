@@ -1,2 +1,0 @@
-drivers/xen/evtchn.o
-

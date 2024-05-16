@@ -1,2 +1,0 @@
-drivers/scsi/BusLogic.o
-

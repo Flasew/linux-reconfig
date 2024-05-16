@@ -1,2 +1,0 @@
-drivers/tty/nozomi.o
-

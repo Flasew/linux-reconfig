@@ -1,2 +1,0 @@
-drivers/staging/iio/resolver/ad2s1210.o
-

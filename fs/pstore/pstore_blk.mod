@@ -1,2 +1,0 @@
-fs/pstore/blk.o
-

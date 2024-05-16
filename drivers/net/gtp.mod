@@ -1,2 +1,0 @@
-drivers/net/gtp.o
-

@@ -1,2 +1,0 @@
-sound/drivers/mtpav.o
-

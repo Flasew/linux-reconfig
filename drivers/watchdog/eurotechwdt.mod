@@ -1,2 +1,0 @@
-drivers/watchdog/eurotechwdt.o
-

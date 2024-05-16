@@ -1,2 +1,0 @@
-drivers/video/vgastate.o
-

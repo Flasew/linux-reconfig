@@ -1,2 +1,0 @@
-drivers/gnss/mtk.o
-

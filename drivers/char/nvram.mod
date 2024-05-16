@@ -1,2 +1,0 @@
-drivers/char/nvram.o
-

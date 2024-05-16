@@ -1,2 +1,0 @@
-net/qrtr/smd.o
-

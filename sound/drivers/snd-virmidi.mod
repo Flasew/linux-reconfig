@@ -1,2 +1,0 @@
-sound/drivers/virmidi.o
-

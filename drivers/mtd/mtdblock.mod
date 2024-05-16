@@ -1,2 +1,0 @@
-drivers/mtd/mtdblock.o
-

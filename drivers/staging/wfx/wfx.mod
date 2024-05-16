@@ -1,2 +1,0 @@
-drivers/staging/wfx/bh.o drivers/staging/wfx/hwio.o drivers/staging/wfx/fwio.o drivers/staging/wfx/hif_tx_mib.o drivers/staging/wfx/hif_tx.o drivers/staging/wfx/hif_rx.o drivers/staging/wfx/queue.o drivers/staging/wfx/data_tx.o drivers/staging/wfx/data_rx.o drivers/staging/wfx/scan.o drivers/staging/wfx/sta.o drivers/staging/wfx/key.o drivers/staging/wfx/main.o drivers/staging/wfx/sta.o drivers/staging/wfx/debug.o drivers/staging/wfx/bus_spi.o drivers/staging/wfx/bus_sdio.o
-

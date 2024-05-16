@@ -1,2 +1,0 @@
-drivers/block/pktcdvd.o
-

@@ -1,2 +1,0 @@
-drivers/char/lp.o
-

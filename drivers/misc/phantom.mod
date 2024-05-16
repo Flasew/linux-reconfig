@@ -1,2 +1,0 @@
-drivers/misc/phantom.o
-

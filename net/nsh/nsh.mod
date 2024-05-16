@@ -1,2 +1,0 @@
-net/nsh/nsh.o
-

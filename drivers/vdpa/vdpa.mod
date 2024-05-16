@@ -1,2 +1,0 @@
-drivers/vdpa/vdpa.o
-

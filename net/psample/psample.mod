@@ -1,2 +1,0 @@
-net/psample/psample.o
-

@@ -1,2 +1,0 @@
-net/packet/diag.o
-

@@ -1,2 +1,0 @@
-drivers/vhost/net.o
-

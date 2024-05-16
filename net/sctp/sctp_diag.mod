@@ -1,2 +1,0 @@
-net/sctp/diag.o
-

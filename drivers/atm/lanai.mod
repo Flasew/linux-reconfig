@@ -1,2 +1,0 @@
-drivers/atm/lanai.o
-

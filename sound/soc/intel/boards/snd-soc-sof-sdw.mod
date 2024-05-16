@@ -1,2 +1,0 @@
-sound/soc/intel/boards/sof_sdw.o sound/soc/intel/boards/sof_sdw_max98373.o sound/soc/intel/boards/sof_sdw_rt1308.o sound/soc/intel/boards/sof_sdw_rt1316.o sound/soc/intel/boards/sof_sdw_rt5682.o sound/soc/intel/boards/sof_sdw_rt700.o sound/soc/intel/boards/sof_sdw_rt711.o sound/soc/intel/boards/sof_sdw_rt711_sdca.o sound/soc/intel/boards/sof_sdw_rt715.o sound/soc/intel/boards/sof_sdw_rt715_sdca.o sound/soc/intel/boards/sof_sdw_dmic.o sound/soc/intel/boards/sof_sdw_hdmi.o
-

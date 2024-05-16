@@ -1,2 +1,0 @@
-net/ife/ife.o
-

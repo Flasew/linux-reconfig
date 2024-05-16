@@ -1,2 +1,0 @@
-drivers/scsi/hpsa.o
-

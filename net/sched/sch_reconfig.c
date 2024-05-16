@@ -89,7 +89,7 @@ reconfig_enqueue(struct sk_buff *skb, struct Qdisc *qdisc,
 			return qdisc_drop(skb, qdisc, to_free);
 	}
 	q = band2list(priv, band);
-	print("[reconfig] Find bind %u\n", band);
+	printk("[reconfig] Find bind %u\n", band);
 
 	err = skb_array_produce(q, skb);
 
@@ -127,7 +127,7 @@ static struct sk_buff *reconfig_dequeue(struct Qdisc *qdisc)
 	bool stopped = READ_ONCE(priv->stopped);
 
 	if (stopped) {
-		printk("TX paused when attempting dequeue\n");
+		printk("[reconfig] TX paused when attempting dequeue\n");
 		return NULL;
 	}
 	// if (netif_xmit_stopped(

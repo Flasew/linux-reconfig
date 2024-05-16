@@ -1344,10 +1344,9 @@ static inline void qdisc_synchronize(const struct Qdisc *q)
 
 struct reconfig_sched_data {
 	u16 max_bands;
-	u16 bands;
 	u16 curband;
-	struct Qdisc **queues;
-	spinlock_t reconfig_sch_lock ____cacheline_aligned_in_smp; 
+	bool stopped;
+	struct skb_array * queues;
 };
 
 #endif

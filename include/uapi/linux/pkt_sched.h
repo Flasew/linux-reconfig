@@ -158,7 +158,7 @@ struct tc_multiq_qopt {
 };
 
 struct tc_reconfig_qopt {
-	__u16	bands;			/* Number of bands */
+	__u16	curband;			/* Number of bands */
 	__u16	max_bands;		/* Maximum number of queues */
 };
 

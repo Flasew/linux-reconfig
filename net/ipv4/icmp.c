@@ -1222,14 +1222,16 @@ static bool icmp_reconfig_noti(struct sk_buff *skb)
 	if (icmph->type != ICMP_RECONFIG_NOTI)
 		goto out_err;
 	
+	q_data = qdisc_priv(q);
 	if (icmph->code == ICMP_RECONF_NOTI_START) {
 		/* Pause the transmission */
-		netif_tx_stop_all_queues(dev);
-		q_data = qdisc_priv(q);
+		// netif_tx_stop_all_queues(dev);
+		WRITE_ONCE(q_data->stopped, true); 
 		WRITE_ONCE(q_data->curband, new_dst_band);
 		printk("Transmission paused on interface %u due to ICMP\n", port_reconfigured);
 	} else if (icmph->code == ICMP_RECONF_NOTI_FINISH) {
-		netif_tx_wake_all_queues(dev);
+		WRITE_ONCE(q_data->stopped, false); 
+		// netif_tx_wake_all_queues(dev);
 		printk("Transmission resumed on interface %u due to ICMP\n", port_reconfigured);
 	} else {
 		goto out_err;

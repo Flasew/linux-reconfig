@@ -1195,7 +1195,7 @@ static bool icmp_reconfig_noti(struct sk_buff *skb)
 	icmph = icmp_hdr(skb);
 	
 	port_reconfigured = icmph->un.reconfig_newconfig.src_port;
-	new_dst_band = icmph->un.reconfig_newconfig.dst_id;
+	new_dst_band = ntohs(icmph->un.reconfig_newconfig.dst_id);
 	printk("icmp reconf noti packet, code %u, ifid %u, dst_id %u, dst_port %u\n",
 	  (unsigned int)icmph->code, (unsigned int)port_reconfigured, 
 	  (unsigned int)new_dst_band, (unsigned int)icmph->un.reconfig_newconfig.dst_port

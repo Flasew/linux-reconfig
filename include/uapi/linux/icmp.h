@@ -28,6 +28,7 @@
 #define ICMP_SOURCE_QUENCH	4	/* Source Quench		*/
 #define ICMP_REDIRECT		5	/* Redirect (change route)	*/
 #define ICMP_ECHO		8	/* Echo Request			*/
+#define ICMP_RECONFIG_NOTI  9   /* topology change notification*/
 #define ICMP_TIME_EXCEEDED	11	/* Time Exceeded		*/
 #define ICMP_PARAMETERPROB	12	/* Parameter Problem		*/
 #define ICMP_TIMESTAMP		13	/* Timestamp Request		*/
@@ -76,6 +77,10 @@
 #define ICMP_EXT_CODE_NO_TABLE_ENT	3	/* No such Table Entry */
 #define ICMP_EXT_CODE_MULT_IFS		4	/* Multiple Interfaces Satisfy Query */
 
+/* Codes for RECONF_NOTI */
+#define ICMP_RECONF_NOTI_START 0
+#define ICMP_RECONF_NOTI_FINISH 1
+
 /* Constants for EXT_ECHO (PROBE) */
 #define ICMP_EXT_ECHOREPLY_ACTIVE	(1 << 2)/* active bit in reply message */
 #define ICMP_EXT_ECHOREPLY_IPV4		(1 << 1)/* ipv4 bit in reply message */
@@ -100,6 +105,16 @@ struct icmphdr {
 		__be16	__unused;
 		__be16	mtu;
 	} frag;
+	/* Serves as a topology change notification.
+	 * At least one message in the following format presents:
+	 * destination id u16, src port u8, dst port u8
+	 * src and dst port here refers to the interface id as identified by the OS
+	 */
+	struct {
+		__be16 dst_id;
+		__u8 src_port;
+		__u8 dst_port;
+	} reconfig_newconfig;
 	__u8	reserved[4];
   } un;
 };

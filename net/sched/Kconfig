@@ -240,6 +240,11 @@ config NET_SCH_NETEM
 
 	  If unsure, say N.
 
+config NET_SCH_RECONFIG
+	tristate "QDisc support for reconfig net (beta)"
+	help
+	  To be filled
+
 config NET_SCH_DRR
 	tristate "Deficit Round Robin scheduler (DRR)"
 	help

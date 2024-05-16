@@ -81,8 +81,10 @@
 #include <net/udp.h>
 #include <net/raw.h>
 #include <net/ping.h>
+#include <net/sch_generic.h>
 #include <linux/skbuff.h>
 #include <net/sock.h>
+#include <net/pkt_sched.h>
 #include <linux/errno.h>
 #include <linux/timer.h>
 #include <linux/init.h>
@@ -1176,6 +1178,70 @@ static bool icmp_discard(struct sk_buff *skb)
 	return true;
 }
 
+/* Handle ICMP reconfiguration notification.
+ * TODO: support body as well as header
+ */
+static bool icmp_reconfig_noti(struct sk_buff *skb)
+{
+	struct icmphdr *icmph;
+	struct net_device *dev = NULL;
+	u8 port_reconfigured;
+	u16 new_dst_band;
+	struct Qdisc *q;
+	struct reconfig_sched_data *q_data;
+
+	// struct net *iter = NULL;
+
+	icmph = icmp_hdr(skb);
+	
+	port_reconfigured = icmph->un.reconfig_newconfig.src_port;
+	new_dst_band = icmph->un.reconfig_newconfig.dst_id;
+	printk("icmp reconf noti packet, code %u, ifid %u, dst_id %u, dst_port %u\n",
+	  (unsigned int)icmph->code, (unsigned int)port_reconfigured, 
+	  (unsigned int)new_dst_band, (unsigned int)icmph->un.reconfig_newconfig.dst_port
+	);
+	
+	rcu_read_lock();
+	dev = dev_get_by_index_rcu(&init_net, port_reconfigured);
+	rcu_read_unlock();
+	if (dev == NULL) {
+		printk("Interface %u does not exist!\n", (unsigned int)port_reconfigured);
+		goto out_err;
+	}
+	
+	/* Same hack as found in sch_fifo.c
+	 * Ensure the qdisc is the right one
+	 */
+	q = dev->qdisc;
+	if (strncmp(q->ops->id, "reconf", 6) != 0) {
+		printk("Interface %u has no reconfig qdisc\n", (unsigned int)port_reconfigured);
+		goto out_err;	
+	}
+
+	/* ICMP type mismatching, drop. */
+	if (icmph->type != ICMP_RECONFIG_NOTI)
+		goto out_err;
+	
+	if (icmph->code == ICMP_RECONF_NOTI_START) {
+		/* Pause the transmission */
+		netif_tx_stop_all_queues(dev);
+		q_data = qdisc_priv(q);
+		WRITE_ONCE(q_data->curband, new_dst_band);
+		printk("Transmission paused on interface %u due to ICMP\n", port_reconfigured);
+	} else if (icmph->code == ICMP_RECONF_NOTI_FINISH) {
+		netif_tx_wake_all_queues(dev);
+		printk("Transmission resumed on interface %u due to ICMP\n", port_reconfigured);
+	} else {
+		goto out_err;
+	}
+
+	return true;
+
+out_err:
+	__ICMP_INC_STATS(dev_net(skb_dst(skb)->dev), ICMP_MIB_INERRORS);
+	return false;
+}
+
 /*
  *	Deal with incoming ICMP packets.
  */
@@ -1405,8 +1471,8 @@ static const struct icmp_control icmp_pointers[NR_ICMP_TYPES + 1] = {
 	[ICMP_ECHO] = {
 		.handler = icmp_echo,
 	},
-	[9] = {
-		.handler = icmp_discard,
+	[ICMP_RECONFIG_NOTI] = {
+		.handler = icmp_reconfig_noti,
 		.error = 1,
 	},
 	[10] = {

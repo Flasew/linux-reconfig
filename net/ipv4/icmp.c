@@ -1231,6 +1231,9 @@ static bool icmp_reconfig_noti(struct sk_buff *skb)
 		printk("Transmission paused on interface %u due to ICMP\n", port_reconfigured);
 	} else if (icmph->code == ICMP_RECONF_NOTI_FINISH) {
 		WRITE_ONCE(q_data->stopped, false); 
+		rcu_read_lock();
+		__netif_schedule(qdisc_root(q));
+		rcu_read_unlock();
 		// netif_tx_wake_all_queues(dev);
 		printk("Transmission resumed on interface %u due to ICMP\n", port_reconfigured);
 	} else {

@@ -125,11 +125,8 @@ static struct sk_buff *reconfig_dequeue(struct Qdisc *qdisc)
 	bool need_retry = true;
 	int band = READ_ONCE(priv->curband);
 	bool stopped = READ_ONCE(priv->stopped);
+	struct skb_array *q;
 
-	if (stopped) {
-		printk("[reconfig] TX paused when attempting dequeue\n");
-		return NULL;
-	}
 	// if (netif_xmit_stopped(
 	// 	netdev_get_tx_queue(qdisc_dev(qdisc), 0))) {
 	// 		printk("TX Queue paused when attempting dequeue\n");
@@ -137,7 +134,11 @@ static struct sk_buff *reconfig_dequeue(struct Qdisc *qdisc)
 	// }
 
 retry:
-	struct skb_array *q = band2list(priv, band);
+	if (stopped) {
+		printk("[reconfig] TX paused when attempting dequeue\n");
+        return NULL;
+	}
+	q = band2list(priv, band);
 	if (__skb_array_empty(q))
 		return NULL;
 	skb = __skb_array_consume(q);

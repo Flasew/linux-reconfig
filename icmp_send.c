@@ -10,8 +10,8 @@
 #include <linux/ip.h>
 #include <unistd.h>
 
-#define SRC_IP "192.168.241.128"
-#define DST_IP "192.168.133.128"
+#define SRC_IP "128.30.92.246"
+#define DST_IP "128.30.92.246"
 
 struct icmphdr {
   uint8_t  icmp_type;

@@ -26,7 +26,7 @@
 #define RECONFIG_BANDS 32
 
 static inline bool is_ipv4_packet(struct sk_buff *skb) {
-	printk("is_ipv4_packet, skb->protocol=%hu\n", skb->protocol);
+	//printk("is_ipv4_packet, skb->protocol=%hu\n", skb->protocol);
     return skb->protocol == htons(ETH_P_IP);
 }
 
@@ -43,12 +43,12 @@ static inline struct skb_array *band2list(struct reconfig_sched_data *priv,
 // 	u32 band;
 
 // 	band = skb_get_queue_mapping(skb);
-// 	printk("[reconfig] band %hu\n", band);
+// 	//printk("[reconfig] band %hu\n", band);
 // 	if (is_ipv4_packet(skb)) {
 // 		struct iphdr * iphdr = ip_hdr(skb);
-// 		printk("[reconfig] ip dst %x\n", iphdr->daddr);
+// 		//printk("[reconfig] ip dst %x\n", iphdr->daddr);
 // 	} else {
-// 		printk("Dropped packet not IPV4\n");
+// 		//printk("Dropped packet not IPV4\n");
 // 		return NULL;
 // 	}
 
@@ -72,9 +72,9 @@ reconfig_enqueue(struct sk_buff *skb, struct Qdisc *qdisc,
 	
 	if (is_ipv4_packet(skb)) {
 		ip_daddr = ntohl(iphdr->daddr);
-		printk("[reconfig] ip dst %x\n", ip_daddr);
+		//printk("[reconfig] ip dst %x\n", ip_daddr);
 	} else {
-		printk("[reconfig] Dropped packet not IPV4\n");
+		//printk("[reconfig] Dropped packet not IPV4\n");
 		if (qdisc_is_percpu_stats(qdisc))
 			return qdisc_drop_cpu(skb, qdisc, to_free);
 		else
@@ -82,14 +82,14 @@ reconfig_enqueue(struct sk_buff *skb, struct Qdisc *qdisc,
 	}
 	band = ((ip_daddr & 0x0000ff00u) >> 8);
 	if (band >= RECONFIG_BANDS)  {
-		printk("[reconfig] Dropped packet not exceeding band count\n");
+		//printk("[reconfig] Dropped packet not exceeding band count\n");
 		if (qdisc_is_percpu_stats(qdisc))
 			return qdisc_drop_cpu(skb, qdisc, to_free);
 		else
 			return qdisc_drop(skb, qdisc, to_free);
 	}
 	q = band2list(priv, band);
-	printk("[reconfig] Find bind %u\n", band);
+	//printk("[reconfig] Find bind %u\n", band);
 
 	err = skb_array_produce(q, skb);
 
@@ -129,13 +129,13 @@ static struct sk_buff *reconfig_dequeue(struct Qdisc *qdisc)
 
 	// if (netif_xmit_stopped(
 	// 	netdev_get_tx_queue(qdisc_dev(qdisc), 0))) {
-	// 		printk("TX Queue paused when attempting dequeue\n");
+	// 		//printk("TX Queue paused when attempting dequeue\n");
 	// 		return NULL;
 	// }
 
 retry:
 	if (stopped) {
-		printk("[reconfig] TX paused when attempting dequeue\n");
+		//printk("[reconfig] TX paused when attempting dequeue\n");
         return NULL;
 	}
 	q = band2list(priv, band);
